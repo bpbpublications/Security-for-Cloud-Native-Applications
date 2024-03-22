@@ -1,2 +1,2 @@
-# Security for Cloud-native Applications
- Security for Cloud-native Applications, by BPB Publications
+# Security for Cloud Native Applications
+ Security for Cloud Native Applications, by BPB Publications
