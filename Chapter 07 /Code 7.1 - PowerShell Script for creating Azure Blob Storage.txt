@@ -1,0 +1,12 @@
+# Create a ResourceGroup and a storage account
+$resourceGroupName = "SampleResourceGroup"
+$storageAccountName = "mystorageacct$(Get-Random)"
+$region = "westeurope"
+$shareName = "myshare"
+New-AzResourceGroup -Name $resourceGroupName -Location $region
+$storAcct = New-AzStorageAccount -ResourceGroupName $resourceGroupName -Name $storageAccountName -SkuName Standard_LRS -Location $region -Kind StorageV2 -AllowBlobPublicAccess $false -AllowCrossTenantReplication $false -MinimumTlsVersion TLS1_2
+New-AzRmStorageShare -ResourceGroupName $resourceGroupName -StorageAccountName $storageAccountName -Name $shareName -AccessTier TransactionOptimized -QuotaGiB 1024
+
+# Remove storage account and ResourceGroup
+Remove-AzStorageAccount -ResourceGroupName $resourceGroupName -AccountName $storageAccountName –Force
+Remove-AzResourceGroup -ResourceGroupName $resourceGroupName –Force

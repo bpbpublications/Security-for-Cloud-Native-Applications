@@ -1,0 +1,9 @@
+version: 0.2
+
+env:
+  secrets-manager:
+    SECRET_VALUE: "arn:aws:secretsmanager:us-east1-2:xxxx:secret:learnaws/test/secret-l5XrF0:secret_key"
+phases:
+  build:
+    commands:
+      - echo $SECRET_VALUE

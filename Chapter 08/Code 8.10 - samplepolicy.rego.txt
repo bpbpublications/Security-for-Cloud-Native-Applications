@@ -1,0 +1,7 @@
+package samplepolicy
+default hello = false
+
+hello {
+  myinput = input.message
+  myinput == "world"
+}

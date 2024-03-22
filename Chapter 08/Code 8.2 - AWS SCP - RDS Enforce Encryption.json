@@ -1,0 +1,25 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "StatementForOtherRDS",
+            "Effect": "Deny",
+            "Action": [
+                "rds:CreateDBInstance"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "rds:DatabaseEngine": [
+                        "mysql",
+                    ]
+                },
+                "Bool": {
+                    "rds:StorageEncrypted": "false"
+                }
+            }
+        },
+    ]
+}

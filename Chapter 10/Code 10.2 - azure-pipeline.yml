@@ -1,0 +1,8 @@
+# Azure Key Vault v2
+# Download Azure Key Vault secrets.
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Your-Azure-Subscription' 
+    KeyVaultName: 'Your-Key-Vault-Name' 
+    SecretsFilter: '*'
+    RunAsPreJob: false

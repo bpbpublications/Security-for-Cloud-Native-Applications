@@ -1,0 +1,34 @@
+resource "azurerm_resource_group" "example" {
+  name     = "httpd-rg"
+  location = "West Europe"
+}
+
+resource "azurerm_container_app_environment" "example" {
+  name                       = "httpd-Environment"
+  location                   = azurerm_resource_group.example.location
+  resource_group_name        = azurerm_resource_group.example.name
+}
+resource "azurerm_container_app" "example" {
+  name                         = "httpd"
+  container_app_environment_id = azurerm_container_app_environment.example.id
+  resource_group_name          = azurerm_resource_group.example.name
+  revision_mode                = "Single"
+
+   ingress {
+     external_enabled = true
+     target_port = 80
+     traffic_weight {
+       latest_revision = true
+       percentage = 100
+     }
+    }
+  
+  template {
+    container {
+      name   = "httpd"
+      image  = "httpd:latest"
+      cpu    = 1.75
+      memory = "3.5Gi"
+    }
+  }
+}
